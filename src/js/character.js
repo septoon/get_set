@@ -13,10 +13,12 @@ class Character {
   }
 
   powerModeTurnOn() {
-    this._powerMode = true;
+    if (this.powerModeWasUse === true) console.error('powerMode unavailable');
+    return this._powerMode;
   }
 
   attack() {
+    if (this.count < 2) this.powerModeWasUse = true;
     if (this.count < 3) {
       this.count += 1;
       this.health *= 2;
@@ -24,7 +26,6 @@ class Character {
       this.defence *= 2;
     } else {
       this._powerMode = false;
-      this.powerModeWasUse = true;
       console.error('no more attacks');
     }
   }
@@ -42,12 +43,4 @@ class Character {
   }
 }
 
-const character = new Character('Маг');
-console.log(character);
-
-character.powerModeTurnOn();
-character.attack();
-character.attack();
-character.attack();
-
-console.log(character);
+export default Character;
