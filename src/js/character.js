@@ -7,26 +7,48 @@ class Character {
     this.health = 10;
     this._attack = 10;
     this.defence = 10;
-    this.count = 0;
+    this.attackCount = 0;
+    this.powerModeCount = 0;
     this.powerModeWasUse = false;
     this._powerMode = false;
   }
 
   powerModeTurnOn() {
-    if (this.powerModeWasUse === true) console.error('powerMode unavailable');
+    this._powerMode = true;
+    if (this.powerModeCount < 2) {
+      this.powerModeCount += 1;
+    }
+    if (this.powerModeWasUse === true) {
+      this._powerMode = false;
+      console.log('powerMode unavailable');
+    }
+    if (this._powerMode === true) {
+      this.health *= 2;
+      this._attack *= 2;
+      this.defence *= 2;
+    }
+
+    if (this._powerMode === false) {
+      this.health = 10;
+      this._attack = 10;
+      this.defence = 10;
+    }
     return this._powerMode;
   }
 
   attack() {
-    if (this.count < 2) this.powerModeWasUse = true;
-    if (this.count < 3) {
-      this.count += 1;
-      this.health *= 2;
-      this._attack *= 2;
-      this.defence *= 2;
-    } else {
+    if (this.attackCount > 1 && this._powerMode === true) {
+      this.powerModeWasUse = true;
       this._powerMode = false;
-      console.error('no more attacks');
+    }
+    if (this.attackCount > 2) {
+      console.log('no more attacks');
+    }
+    if (this.attackCount < 2 && this.powerModeCount === 1) {
+      this._powerMode = true;
+    }
+    if (this.attackCount < 3) {
+      this.attackCount += 1;
     }
   }
 
@@ -35,9 +57,7 @@ class Character {
   }
 
   set powerMode(value) {
-    if (this.powerModeWasUse === true) {
-      console.error('powerMode unavailable');
-    } else if (value === true) {
+    if (value === true) {
       this._powerMode = true;
     }
   }
