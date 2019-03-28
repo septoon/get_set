@@ -4,10 +4,10 @@ import Character from './js/character';
 const character = new Character('Маг');
 console.log(character);
 
-character.powerModeTurnOn();
-character.attack();
-character.attack();
-// console.log(character);
-character.attack();
-// character.powerModeTurnOn();
+character.powerMode = true;
+character.attackFor();
+character.attackFor();
+console.log(character);
+character.attackFor();
+character.attackFor();
 console.log(character);
