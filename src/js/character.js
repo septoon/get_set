@@ -23,17 +23,23 @@ class Character {
   }
 
   get health() {
-    if (this._powerMode === true) this._health *= 2;
+    if (this._powerMode === true) {
+      return this._health * 2;
+    }
     return this._health;
   }
 
   get attack() {
-    if (this._powerMode === true) this._attack *= 2;
+    if (this._powerMode === true) {
+      return this._attack * 2;
+    }
     return this._attack;
   }
 
   get defence() {
-    if (this._powerMode === true) this._defence *= 2;
+    if (this._powerMode === true) {
+      return this._defence * 2;
+    }
     return this._defence;
   }
 
