@@ -1,67 +1,108 @@
 import Character from '../src/js/character';
 
 test('powerMode off', () => {
-  const received = new Character('Маг');
+  const character = new Character('Маг');
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 10, _attack: 10, _defence: 10, attackCount: 0, powerModeWasUse: false, _powerMode: false,
+    health: 10, attack: 10, defence: 10, powerMode: false,
   };
   expect(received).toEqual(expected);
 });
 
 test('powerMode on', () => {
-  const received = new Character('Маг');
-  received.powerMode = true;
+  const character = new Character('Маг');
+  character.powerMode = true;
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 20, _attack: 20, _defence: 20, attackCount: 0, powerModeWasUse: false, _powerMode: true,
+    health: 20, attack: 20, defence: 20, powerMode: true,
   };
   expect(received).toEqual(expected);
 });
 
 test('powerMode was used', () => {
-  const received = new Character('Маг');
-  received.powerMode = true;
-  received.attackFor();
-  received.attackFor();
-  received.attackFor();
-  received.powerMode = true;
+  const character = new Character('Маг');
+  character.powerMode = true;
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  character.powerMode = true;
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+    powerModeWasUse: character.powerModeWasUse,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 10, _attack: 10, _defence: 10, attackCount: 3, powerModeWasUse: false, _powerMode: true,
+    health: 10, attack: 10, defence: 10, powerMode: false, powerModeWasUse: true,
   };
   expect(received).toEqual(expected);
 });
 
 test('with attack', () => {
-  const received = new Character('Маг');
-  received.powerMode = true;
-  received.attackFor();
-  received.attackFor();
-  received.attackFor();
+  const character = new Character('Маг');
+  character.powerMode = true;
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+    powerModeWasUse: character.powerModeWasUse,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 20, _attack: 20, _defence: 20, attackCount: 3, powerModeWasUse: false, _powerMode: true,
+    health: 20, attack: 20, defence: 20, powerMode: true, powerModeWasUse: false,
   };
   expect(received).toEqual(expected);
 });
 
 test('with 4 attack', () => {
-  const received = new Character('Маг');
-  received.powerMode = true;
-  received.attackFor();
-  received.attackFor();
-  received.attackFor();
-  received.attackFor();
+  const character = new Character('Маг');
+  character.powerMode = true;
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+    powerModeWasUse: character.powerModeWasUse,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 20, _attack: 20, _defence: 20, attackCount: 3, powerModeWasUse: true, _powerMode: false,
+    health: 10, attack: 10, defence: 10, powerMode: false, powerModeWasUse: true,
   };
   expect(received).toEqual(expected);
 });
 
 test('with attack, powermode off', () => {
-  const received = new Character('Маг');
-  received.attackFor();
-  received.attackFor();
-  received.attackFor();
+  const character = new Character('Маг');
+  character.attackFor();
+  character.attackFor();
+  character.attackFor();
+  const received = {
+    health: character.health,
+    attack: character.attack,
+    defence: character.defence,
+    powerMode: character.powerMode,
+    powerModeWasUse: character.powerModeWasUse,
+  };
   const expected = {
-    name: 'Маг', level: 1, _health: 10, _attack: 10, _defence: 10, attackCount: 3, powerModeWasUse: false, _powerMode: false,
+    health: 10, attack: 10, defence: 10, powerMode: false, powerModeWasUse: false,
   };
   expect(received).toEqual(expected);
 });
